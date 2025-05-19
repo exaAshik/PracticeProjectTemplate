@@ -8,6 +8,8 @@ import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
 
+import java.net.URI;
+
 @Configuration
 public class AppConfig {
 
@@ -25,6 +27,7 @@ public class AppConfig {
 
         return SecretsManagerClient.builder()
                 .region(Region.of(region))
+                .endpointOverride(URI.create("http://localhost:4566"))
                 .credentialsProvider(StaticCredentialsProvider.create(
                         AwsBasicCredentials.create(access_key, secret_key)
                 ))
